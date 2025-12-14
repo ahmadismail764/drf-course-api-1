@@ -40,8 +40,12 @@ class Order(models.Model):
         return f"Order {self.order_id} by {self.user.username}"
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey(
+        Order,
+        related_name ='items',
+        on_delete=models.CASCADE
+    )
+    product = models.ForeignKey(Product, related_name='product', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
     @property
