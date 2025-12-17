@@ -1,3 +1,7 @@
-from django.test import TestCase
+from django.test import TestCase, Client
 
-# Create your tests here.
+class OrderTests(TestCase):
+    def test_order_list(self):        
+        c = Client()
+        response = c.get(path='/orders/', content_type='text/plain')
+        self.assertEqual(response.status_code, 200)
